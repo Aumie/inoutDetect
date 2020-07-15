@@ -9,8 +9,11 @@ from process import isCamsOpen
 
 
 class Camera(QMainWindow):
-    def __init__(self):
+    def __init__(self, cameranum):
         super(Camera, self).__init__()
+
+        self.cameranum = cameranum
+
         uic.loadUi('ui/prototype.ui', self)
         self.setStyleSheet(open("ui/style.qss", "r").read())
         self.setWindowIcon(QIcon('ui/spongebob_police.png'))
@@ -55,7 +58,8 @@ class Camera(QMainWindow):
         # kill thread
         self.thread.stopwhile()
         del self.thread
-        isCamsOpen.iscamopen = False
+        if self.cameranum == 0:
+            isCamsOpen.iscamopen = False
         # Does this deallocate memory??? I don't know but it looks good.
         gc.collect()
         event.accept()

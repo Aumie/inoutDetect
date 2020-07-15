@@ -1,5 +1,7 @@
 import os
 import re
+
+from MainLayers.ipInputs import IpInputs
 from process import isCamsOpen
 from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QFont
@@ -35,13 +37,13 @@ def grid_layout(self):
     # btn.setIcon(QIcon('icon.png'))
     btn.setIconSize(QSize(40, 50))
     grid.addWidget(btn, 0, 0)
-    btn.clicked.connect(self.open_cam)
+    btn.clicked.connect(self.open_cam, 0)
 
     btn1 = QPushButton('camera 2', self)
     # btn1.setIcon(QIcon('icon.png'))
     btn1.setIconSize(QSize(40, 50))
     grid.addWidget(btn1, 0, 1)
-    # btn1.clicked.connect(self.check)
+    # btn1.clicked.connect(self.open_cam)
 
     btn2 = QPushButton('camera 3', self)
     # btn2.setIcon(QIcon('icon.png'))
@@ -49,11 +51,15 @@ def grid_layout(self):
     # btn2.setMinimumHeight(40)
     # btn2.setMaximumHeight(40)
     grid.addWidget(btn2, 1, 0)
+    # btn2.clicked.connect(self.open_cam)
+
 
     btn3 = QPushButton('camera 4', self)
     # btn1.setIcon(QIcon('icon.png'))
     btn3.setIconSize(QSize(40, 50))
     grid.addWidget(btn3, 1, 1)
+    # btn3.clicked.connect(self.open_cam)
+
 
     ipsetbtn = QPushButton('Cemeras\' ip setting')
     ipsetbtn.setIconSize(QSize(40, 60))
@@ -66,47 +72,47 @@ def grid_layout(self):
     self.setLayout(vbox)
 
 
-def open_cam(self):
-    if isCamsOpen.iscamopen:
-        return information_box('camera1 is Already opened', 0)
+def open_cam(self, cameranum):
+    if cameranum == 0:
+        if isCamsOpen.iscamopen:
+            return information_box('camera1 is Already opened', 0)
 
-    if not isCamsOpen.camip:
-        return information_box('camera\'s ip is required.', 0)
+        if not isCamsOpen.camip:
+            return information_box('camera\'s ip is required.', 0)
 
-    if not ping_check():
-        return 'no connection...'
+        if not ping_check():
+            return 'no connection...'
 
-    self.cam = Camera()
-    self.cam.show()
-    isCamsOpen.iscamopen = True
+        self.cam = Camera(cameranum)
+        self.cam.show()
+        isCamsOpen.iscamopen = True
 
 
 def enterip(self):
-    self.ipdialog = ipDialog()
-    self.ipdialog.okbtn.clicked.connect(self.accept_ip)
+    self.ipdialog = IpInputs()
+    # self.ipdialog = ipDialog()
+    # self.ipdialog.okbtn.clicked.connect(self.accept_ip)
 
 
-def accept_ip(self):
-    # check if ok already clicked
-    if self.ipBoxFlag:
-        return information_box('Please, be patient.', 0)
-    # pattern check
-    pattern = re.compile("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$")
-
-    if pattern.match(self.ipdialog.camipinput.text()):
-        pass
-        # print('match')
-    else:
-        # print('not match')
-        return information_box('Wrong ip pattern', 0)
-
-    if not self.ipBoxFlag:
-        self.ipBoxFlag = True
-
-    # print(isCamsOpen.camip)
-    self.testip = 'http://' + self.ipdialog.camipinput.text() + ':8081/'
-    # print(isCamsOpen.camip)
-    # print(self.testip)
-    self.ipChecker(self.testip)
-    # print(self.testip)
+# def accept_ip(self):
+#     # check if ok already clicked
+#     if self.ipBoxFlag:
+#         return information_box('Please, be patient.', 0)
+#     # pattern check
+#     pattern = re.compile("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$")
+#
+#     iptext = self.ipdialog.camipinput.text()
+#
+#     if not pattern.match(iptext):
+#         if iptext != '':
+#             return information_box('Wrong ip pattern', 0)
+#
+#     # print(isCamsOpen.camip)
+#     if iptext != '':
+#         self.testip = 'http://' + iptext + ':8081/'
+#         # print(isCamsOpen.camip)
+#         # print(self.testip)
+#         self.ipChecker()
+#         # print(self.testip)
+#         self.ipBoxFlag = True
 

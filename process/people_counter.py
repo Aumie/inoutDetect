@@ -31,6 +31,10 @@ class VideoThread(QThread):  # -----------------------------------------
     isInitialized = pyqtSignal(bool)  # -----------------------------------------
     change_pixmap_signal = pyqtSignal(np.ndarray)  # -----------------------------------------
 
+    def __init__(self, cameranum):
+        super().__init__()
+        self.cameranum = cameranum
+
     def stopwhile(self):  # -----------------------------------------
         self.fps.stop()
         # self.vs.release() # i see other people use this but it not suit here.
@@ -73,7 +77,8 @@ class VideoThread(QThread):  # -----------------------------------------
         if not args.get("input", False):
             # print("[INFO] starting video stream...")
             # vs = VideoStream(src=0).start()
-            self.vs = VideoStream(isCamsOpen.camip).start()  # -----------------------------------------
+            if self.cameranum == 0:
+                self.vs = VideoStream(isCamsOpen.camip).start()  # -----------------------------------------
             time.sleep(2.0)
 
         # initialize the frame dimensions (we'll set them as soon as we read
@@ -232,7 +237,8 @@ class VideoThread(QThread):  # -----------------------------------------
                         # line, count the object
                         if direction < 0 and centroid[1] < H // 2:
                             # totalUp += 1
-                            isCamsOpen.p_in += 1
+                            if self.cameranum == 0:
+                                isCamsOpen.p_in += 1
                             # firebase.update({
                             #     'in': totalUp
                             # })
@@ -243,7 +249,8 @@ class VideoThread(QThread):  # -----------------------------------------
                         # center line, count the object
                         elif direction > 0 and centroid[1] > H // 2:
                             # totalDown += 1
-                            isCamsOpen.p_out += 1
+                            if self.cameranum == 0:
+                                isCamsOpen.p_out += 1
                             # firebase.update({
                             #     'out': totalDown
                             # })

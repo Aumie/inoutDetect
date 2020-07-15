@@ -23,30 +23,23 @@ class Main(QMainWindow):
 
         # initialize variables that will point to new window
         self.cam = None
-        self.ipdialog = None
-        self.loading = None
-        # flag for ip box
-        self.isValidIp = False
-        self.isTestIpDone = False
-        self.ipBoxFlag = False
         self.show()
 
     # gray colour still means it is being used.
-    from MainLayers.ipChecker import ipChecker, update_isTestIpDone, update_isValidIp
-    from MainLayers.leftgrid import grid_layout, open_cam, enterip, accept_ip
+    from MainLayers.leftgrid import grid_layout, open_cam, enterip
     from MainLayers.rightlayout.historybtn import set_calendar, history_popup
     from MainLayers.dialog_box import information_box
 
-    def closeEvent(self, event):
-        if self.cam is not None:
-            if self.cam.isVisible():
-                self.cam.close()
-        if self.ipdialog is not None:
-            if self.ipdialog.isVisible():
-                self.ipdialog.close()
-        if self.loading is not None:
-            if self.loading.isVisible():
-                self.loading.close()
+    # def closeEvent(self, event):
+    #     if self.cam is not None:
+    #         if self.cam.isVisible():
+    #             self.cam.close()
+    #     if self.ipdialog is not None:
+    #         if self.ipdialog.isVisible():
+    #             self.ipdialog.close()
+    #     if self.loading is not None:
+    #         if self.loading.isVisible():
+    #             self.loading.close()
 
 
 if __name__ == '__main__':

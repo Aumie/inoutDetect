@@ -12,7 +12,7 @@ def set_monitor(self):
     self.display_height = 480
     self.monitor.resize(self.disply_width, self.display_height)
 
-    self.thread = VideoThread()
+    self.thread = VideoThread(self.cameranum)
     # connect its signal to the update_image slot
     self.thread.change_pixmap_signal.connect(self.update_image)
     # start the thread

@@ -46,14 +46,15 @@ class Worker(QThread):
         '''
         Your code goes in this function
         '''
-        # print("Thread start")
+        print("Thread start")
+        print(self.ip)
         cap = cv2.VideoCapture(self.ip)
         if cap is None or not cap.isOpened():
             self.isValid.emit(False)
         else:
             self.isValid.emit(True)
         self.isDone.emit(True)
-        # print("Thread complete")
+        print("Thread complete")
 
 
 
