@@ -17,9 +17,10 @@ class Camera(QMainWindow):
         uic.loadUi('ui/prototype.ui', self)
         self.setStyleSheet(open("ui/style.qss", "r").read())
         self.setWindowIcon(QIcon('ui/spongebob_police.png'))
-        self.setWindowTitle('Camera{} Streamer'.format(cameranum+1))
+        self.setWindowTitle('Camera{} Streamer'.format(cameranum + 1))
+        self.setFixedSize(1280, 800)
         self.monitorlbl = self.findChild(QLabel, 'monitorlbl')
-        self.monitorlbl.setText('camera{}'.format(cameranum+1))
+        self.monitorlbl.setText('camera{}'.format(cameranum + 1))
         self.monitorlbl.setFont(QFont("Helvetica [Cronyx]", 15))
 
         # set up layouts
@@ -32,9 +33,6 @@ class Camera(QMainWindow):
         self.isThreadInitialized = False
 
         self.thread.isInitialized.connect(self.isThreadDone_update)
-
-
-
 
     from Cameras_Layers.vboxright.timedisplay import set_time
     from Cameras_Layers.vboxright.totallcd import set_totallcd
@@ -73,5 +71,3 @@ class Camera(QMainWindow):
         # Does this deallocate memory??? I don't know but it looks good.
         gc.collect()
         event.accept()
-
-
