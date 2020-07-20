@@ -3,6 +3,7 @@ from PyQt5.QtGui import QTextCharFormat, QIcon
 from PyQt5.QtWidgets import QCalendarWidget, QMessageBox
 from datetime import datetime
 from MainLayers.dialog_box import information_box
+from MainLayers.rightlayout.barchart import BarChart
 
 
 def set_calendar(self):
@@ -28,13 +29,4 @@ def history_popup(self, cdate):
     data = firebase.get()
     if not data:
         return information_box('Has no data on this day.', -1)
-    information_box(
-        """Entered : {0}
-Exit : {1}
-Start time : {2}        
-End time : {3}      
-        """.format(data['in'], data['out'], data['time_start'], data['time_end']), 1
-    )
-
-
-
+    self.barchart = BarChart(data, [day, month, year])
