@@ -18,7 +18,7 @@ class IpInputs(QThread):
         self.ipBoxFlag = False
 
         self.ipdialog = ipDialog()
-        self.ipdialog.setWindowTitle('IP{} Setting'.format(self.cameranum+1))
+        self.ipdialog.setWindowTitle('IP{} Setting'.format(self.cameranum + 1))
         self.ipdialog.show()
         self.ipdialog.okbtn.clicked.connect(self.accept_ip)
 
@@ -32,6 +32,8 @@ class IpInputs(QThread):
         pattern = re.compile("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$")
 
         iptext = self.ipdialog.camipinput.text()
+        id = self.ipdialog.idinput.text()
+        pwd = self.ipdialog.pwdinput.text()
 
         if not pattern.match(iptext):
             if iptext != '':
@@ -39,7 +41,7 @@ class IpInputs(QThread):
 
         # print(isCamsOpen.camip)
         if iptext != '':
-            self.testip = 'http://' + iptext + ':8081/'
+            self.testip = 'rtsp://{0}:{1}@{2}:554/stream1'.format(id, pwd, iptext)
             # print(isCamsOpen.camip)
             # print(self.testip)
             self.ipChecker()
@@ -47,4 +49,3 @@ class IpInputs(QThread):
             self.ipBoxFlag = True
         if iptext == '':
             self.ipdialog.close()
-
