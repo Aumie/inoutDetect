@@ -1,7 +1,7 @@
 from PyQt5 import uic
 from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtGui import QIcon, QFont
+from PyQt5.QtWidgets import QMainWindow, QLabel
 import gc
 
 from MainLayers.dialog_box import information_box
@@ -17,6 +17,10 @@ class Camera(QMainWindow):
         uic.loadUi('ui/prototype.ui', self)
         self.setStyleSheet(open("ui/style.qss", "r").read())
         self.setWindowIcon(QIcon('ui/spongebob_police.png'))
+        self.setWindowTitle('Camera{} Streamer'.format(cameranum+1))
+        self.monitorlbl = self.findChild(QLabel, 'monitorlbl')
+        self.monitorlbl.setText('camera{}'.format(cameranum+1))
+        self.monitorlbl.setFont(QFont("Helvetica [Cronyx]", 15))
 
         # set up layouts
         self.set_time()
