@@ -7,8 +7,9 @@ from process import isCamsOpen
 
 
 class IpInputs(QThread):
-    def __init__(self):
+    def __init__(self, cameranum):
         super().__init__()
+        self.cameranum = cameranum
         self.ipdialog = None
         self.loading = None
         # flag for ip box
@@ -17,6 +18,8 @@ class IpInputs(QThread):
         self.ipBoxFlag = False
 
         self.ipdialog = ipDialog()
+        self.ipdialog.setWindowTitle('IP{} Setting'.format(self.cameranum+1))
+        self.ipdialog.show()
         self.ipdialog.okbtn.clicked.connect(self.accept_ip)
 
     from MainLayers.ipChecker import ipChecker, update_isTestIpDone, update_isValidIp
@@ -42,3 +45,6 @@ class IpInputs(QThread):
             self.ipChecker()
             # print(self.testip)
             self.ipBoxFlag = True
+        if iptext == '':
+            self.ipdialog.close()
+

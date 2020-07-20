@@ -3,10 +3,16 @@ iscam1open = False
 iscam2open = False
 iscam3open = False
 
-camip = None  # 'http://192.168.1.110:8081/' home, http://192.168.89.109:8081/ ndrs
+camip = None  # 'rtsp://tapoc200:123456@192.168.89.121:554/stream1'
 camip1 = None
 camip2 = None
 camip3 = None
 
 p_in = 0
 p_out = 0
+p_in1 = 0
+p_out1 = 0
+p_in2 = 0
+p_out2 = 0
+p_in3 = 0
+p_out3 = 0

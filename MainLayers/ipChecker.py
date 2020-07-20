@@ -27,11 +27,19 @@ def update_isTestIpDone(self, value):
 def update_isValidIp(self, val):
     self.isValidIp = val
     # print('Done from update_isValid')
-    message = 'The test is Done.\n' + ('valid ip address.' if self.isValidIp else 'invalid ip address.')
+    message = 'The test{} is Done.\n'.format(self.cameranum+1) + ('valid ip address.' if self.isValidIp else 'invalid ip address.')
     self.loading.stopAnimation()
     if self.isValidIp:
         information_box(message, 1)
-        isCamsOpen.camip = self.testip
+        if self.cameranum == 0:
+            isCamsOpen.camip = self.testip
+        if self.cameranum == 1:
+            isCamsOpen.camip1 = self.testip
+        if self.cameranum == 2:
+            isCamsOpen.camip2 = self.testip
+        if self.cameranum == 3:
+            isCamsOpen.camip3 = self.testip
+
         self.ipdialog.close()
     else:
         information_box(message, 0)
