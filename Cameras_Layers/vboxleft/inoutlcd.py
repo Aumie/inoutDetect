@@ -7,8 +7,6 @@ from process import isCamsOpen
 def set_inoutlcds(self):
     self.outlcd = self.findChild(QLCDNumber, 'outlcd')
     self.inlcd = self.findChild(QLCDNumber, 'inlcd')
-    self.resin = 0
-    self.resout = 0
 
     self.timer_in = QtCore.QTimer(self)
     self.timer_out = QtCore.QTimer(self)
@@ -21,8 +19,22 @@ def set_inoutlcds(self):
 
 
 def update_lcdin(self):
-    self.inlcd.display(isCamsOpen.p_in)
+    if self.cameranum == 0:
+        self.inlcd.display(isCamsOpen.p_in)
+    if self.cameranum == 1:
+        self.inlcd.display(isCamsOpen.p_in1)
+    if self.cameranum == 2:
+        self.inlcd.display(isCamsOpen.p_in2)
+    if self.cameranum == 3:
+        self.inlcd.display(isCamsOpen.p_in3)
 
 
 def update_lcdout(self):
-    self.outlcd.display(isCamsOpen.p_out)
+    if self.cameranum == 0:
+        self.outlcd.display(isCamsOpen.p_out)
+    if self.cameranum == 1:
+        self.outlcd.display(isCamsOpen.p_out1)
+    if self.cameranum == 2:
+        self.outlcd.display(isCamsOpen.p_out2)
+    if self.cameranum == 3:
+        self.outlcd.display(isCamsOpen.p_out3)

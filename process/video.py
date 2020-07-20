@@ -60,6 +60,12 @@ class Camera(QMainWindow):
         del self.thread
         if self.cameranum == 0:
             isCamsOpen.iscamopen = False
+        if self.cameranum == 1:
+            isCamsOpen.iscam1open = False
+        if self.cameranum == 2:
+            isCamsOpen.iscam2open = False
+        if self.cameranum == 3:
+            isCamsOpen.iscam3open = False
         # Does this deallocate memory??? I don't know but it looks good.
         gc.collect()
         event.accept()
