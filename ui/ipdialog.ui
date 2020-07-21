@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>299</width>
-    <height>169</height>
+    <width>300</width>
+    <height>170</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -122,6 +122,19 @@
     <string>Password :</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="clearbtn">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>140</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Clear current IP</string>
+   </property>
+  </widget>
   <zorder>label_2</zorder>
   <zorder>label_3</zorder>
   <zorder>label</zorder>
@@ -129,6 +142,7 @@
   <zorder>okbtn</zorder>
   <zorder>idinput</zorder>
   <zorder>pwdinput</zorder>
+  <zorder>clearbtn</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -21,8 +21,20 @@ class IpInputs(QThread):
         self.ipdialog.setWindowTitle('IP{} Setting'.format(self.cameranum + 1))
         self.ipdialog.show()
         self.ipdialog.okbtn.clicked.connect(self.accept_ip)
+        self.ipdialog.clearbtn.clicked.connect(self.clear_curIP)
 
     from MainLayers.ipChecker import ipChecker, update_isTestIpDone, update_isValidIp
+
+    def clear_curIP(self):
+        if self.cameranum == 0:
+            isCamsOpen.camip = None
+        if self.cameranum == 1:
+            isCamsOpen.camip1 = None
+        if self.cameranum == 2:
+            isCamsOpen.camip2 = None
+        if self.cameranum == 3:
+            isCamsOpen.camip3 = None
+        information_box('IP{} has been cleared'.format(self.cameranum + 1), 1)
 
     def accept_ip(self):
         # check if ok already clicked
@@ -48,7 +60,7 @@ class IpInputs(QThread):
             allip = [isCamsOpen.camip, isCamsOpen.camip1, isCamsOpen.camip2, isCamsOpen.camip3]
             for idx in range(len(allip)):
                 if allip[idx] == self.testip:
-                    return information_box('You Donky!\nThis ip has already been used.', -1)
+                    return information_box('You Donky!\nThis IP has already been used.', -1)
 
             self.ipChecker()
             # print(self.testip)
