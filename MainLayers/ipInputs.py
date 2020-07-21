@@ -22,8 +22,26 @@ class IpInputs(QThread):
         self.ipdialog.show()
         self.ipdialog.okbtn.clicked.connect(self.accept_ip)
         self.ipdialog.clearbtn.clicked.connect(self.clear_curIP)
+        self.ipdialog.formatbox.currentTextChanged.connect(self.select_format)
+        self.selectedformat = 'r'
 
     from MainLayers.ipChecker import ipChecker, update_isTestIpDone, update_isValidIp
+
+    def select_format(self):
+        text = self.ipdialog.formatbox.currentText()
+        if text == 'RSTP':
+            self.selectedformat = 'r'
+            self.ipdialog.idinput.setText('')
+            self.ipdialog.idinput.setReadOnly(False)
+            self.ipdialog.pwdinput.setText('')
+            self.ipdialog.pwdinput.setReadOnly(False)
+        else:
+            self.selectedformat = 'h'
+            self.ipdialog.idinput.setText('')
+            self.ipdialog.idinput.setReadOnly(True)
+            self.ipdialog.pwdinput.setText('')
+            self.ipdialog.pwdinput.setReadOnly(True)
+
 
     def clear_curIP(self):
         if self.cameranum == 0:
@@ -53,7 +71,10 @@ class IpInputs(QThread):
 
         # print(isCamsOpen.camip)
         if iptext != '':
-            self.testip = 'rtsp://{0}:{1}@{2}:554/stream1'.format(id, pwd, iptext)
+            if self.selectedformat == 'r':
+                self.testip = 'rtsp://{0}:{1}@{2}:554/stream1'.format(id, pwd, iptext)
+            else:
+                self.testip = 'http://{}:8081/'.format(iptext)
             # print(isCamsOpen.camip)
             # print(self.testip)
 

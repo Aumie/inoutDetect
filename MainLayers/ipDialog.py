@@ -1,6 +1,6 @@
 from PyQt5 import uic
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QDialog, QLineEdit, QPushButton
+from PyQt5.QtWidgets import QDialog, QLineEdit, QPushButton, QComboBox
 
 
 class ipDialog(QDialog):
@@ -19,3 +19,4 @@ class ipDialog(QDialog):
         self.pwdinput = self.findChild(QLineEdit, 'pwdinput')
         self.okbtn = self.findChild(QPushButton, 'okbtn')
         self.clearbtn = self.findChild(QPushButton, 'clearbtn')
+        self.formatbox = self.findChild(QComboBox, 'formatbox')
