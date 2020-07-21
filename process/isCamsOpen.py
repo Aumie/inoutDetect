@@ -21,3 +21,9 @@ limit = 0
 limit1 = 0
 limit2 = 0
 limit3 = 0
+
+# Cams Direction
+camdirect = 'lr'
+camdirect1 = 'lr'
+camdirect2 = 'lr'
+camdirect3 = 'lr'

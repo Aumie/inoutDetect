@@ -10,8 +10,10 @@ class IpInputs(QThread):
     def __init__(self, cameranum):
         super().__init__()
         self.cameranum = cameranum
+        # flag of variable that will point to new window
         self.ipdialog = None
         self.loading = None
+        self.camdialog = None
         # flag for ip box
         self.isValidIp = False
         self.isTestIpDone = False

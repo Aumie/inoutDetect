@@ -1,4 +1,6 @@
 from PyQt5.QtCore import pyqtSlot
+
+from MainLayers.cameraDialog import callcameraDialog
 from process import isCamsOpen
 from MainLayers.checkingThread import LoadingScreen, Worker
 from MainLayers.dialog_box import information_box
@@ -41,6 +43,7 @@ def update_isValidIp(self, val):
             isCamsOpen.camip3 = self.testip
 
         self.ipdialog.close()
+        callcameraDialog(self.cameranum)
     else:
         information_box(message, 0)
 
