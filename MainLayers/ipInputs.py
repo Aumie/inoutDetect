@@ -44,6 +44,12 @@ class IpInputs(QThread):
             self.testip = 'rtsp://{0}:{1}@{2}:554/stream1'.format(id, pwd, iptext)
             # print(isCamsOpen.camip)
             # print(self.testip)
+
+            allip = [isCamsOpen.camip, isCamsOpen.camip1, isCamsOpen.camip2, isCamsOpen.camip3]
+            for idx in range(len(allip)):
+                if allip[idx] == self.testip:
+                    return information_box('You Donky!\nThis ip has already been used.', -1)
+
             self.ipChecker()
             # print(self.testip)
             self.ipBoxFlag = True

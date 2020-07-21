@@ -209,7 +209,7 @@ class VideoThread(QThread):  # -----------------------------------------
             # draw a horizontal line in the center of the frame -- once an
             # object crosses this line we will determine whether they were
             # moving 'up' or 'down'
-            cv2.line(frame, (0, H // 2), (W, H // 2), (0, 255, 255), 2)
+            cv2.line(frame, (W // 2, 0), (W // 2, H), (0, 255, 255), 2)
 
             # use the centroid tracker to associate the (1) old object
             # centroids with (2) the newly computed object centroids
@@ -232,8 +232,8 @@ class VideoThread(QThread):  # -----------------------------------------
                     # centroid and the mean of *previous* centroids will tell
                     # us in which direction the object is moving (negative for
                     # 'up' and positive for 'down')
-                    y = [c[1] for c in to.centroids]
-                    direction = centroid[1] - np.mean(y)
+                    x = [c[0] for c in to.centroids]
+                    direction = centroid[0] - np.mean(x)
                     to.centroids.append(centroid)
 
                     # check to see if the object has been counted or not
@@ -241,7 +241,7 @@ class VideoThread(QThread):  # -----------------------------------------
                         # if the direction is negative (indicating the object
                         # is moving up) AND the centroid is above the center
                         # line, count the object
-                        if direction < 0 and centroid[1] < H // 2:
+                        if direction < 0 and centroid[0] < W // 2:
                             # totalUp += 1
                             if self.cameranum == 0:
                                 isCamsOpen.p_in += 1
@@ -259,7 +259,7 @@ class VideoThread(QThread):  # -----------------------------------------
                         # if the direction is positive (indicating the object
                         # is moving down) AND the centroid is below the
                         # center line, count the object
-                        elif direction > 0 and centroid[1] > H // 2:
+                        elif direction > 0 and centroid[0] > W // 2:
                             # totalDown += 1
                             if self.cameranum == 0:
                                 isCamsOpen.p_out += 1
