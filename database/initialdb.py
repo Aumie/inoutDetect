@@ -32,7 +32,7 @@ def data_today():
     if firebase.child('out0').get() is None:
         firebase.update({'out0': 0})
     else:
-        isCamsOpen.p_out = firebase.child('out').get()
+        isCamsOpen.p_out = firebase.child('out0').get()
     if firebase.child('time_end').get() is None:
         firebase.update({'time_end': str(datetime.now().strftime("%H:%M:%S"))})
     if firebase.child('time_start').get() is None:

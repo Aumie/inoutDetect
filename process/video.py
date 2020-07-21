@@ -28,6 +28,7 @@ class Camera(QMainWindow):
         self.set_monitor()
         self.set_inoutlcds()
         self.set_totallcd()
+        self.set_spinBox()
 
         # thread Flag
         self.isThreadInitialized = False
@@ -38,6 +39,7 @@ class Camera(QMainWindow):
     from Cameras_Layers.vboxright.totallcd import set_totallcd
     from Cameras_Layers.vboxmid.monitor import set_monitor, update_image, convert_cv_qt
     from Cameras_Layers.vboxleft.inoutlcd import set_inoutlcds, update_lcdin, update_lcdout
+    from Cameras_Layers.vboxright.pplnumlimit import set_spinBox, spin_update, line_notify
 
     @pyqtSlot(bool)
     def isThreadDone_update(self, val):
@@ -56,6 +58,8 @@ class Camera(QMainWindow):
         del self.timer_out
         self.totaltimer.stop()
         del self.totaltimer
+        self.limiter_timer.stop()
+        del self.limiter_timer
 
         # kill thread
         self.thread.stopwhile()

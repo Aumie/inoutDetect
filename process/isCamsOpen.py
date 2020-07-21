@@ -16,3 +16,8 @@ p_in2 = 0
 p_out2 = 0
 p_in3 = 0
 p_out3 = 0
+
+limit = 0
+limit1 = 0
+limit2 = 0
+limit3 = 0
