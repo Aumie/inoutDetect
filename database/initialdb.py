@@ -16,7 +16,16 @@ firebase = ref.child(year).child(month).child(day)
 
 
 def initialdb():
-    global ref
+    global ref, month, day, year
+    # delete data of 1 year before today 1 day 1 month
+    oldday = str(int(day) - 1)
+    oldmonth = str(int(month) - 1)
+    oldyear = str(int(year) - 1)
+    oldday = '0' + oldday if len(oldday) == 1 else oldday
+    oldmonth = '0' + oldmonth if len(oldmonth) == 1 else oldmonth
+
+    ref.child(oldyear).child(oldmonth).child(oldday).delete()
+
     data_today()
     return ref
 
