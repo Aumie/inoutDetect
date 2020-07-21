@@ -5,7 +5,7 @@ import sys
 
 from MainLayers.dialog_box import information_box
 from database.initialdb import initialdb
-from database.updateToFirebase import loop_update_firebase
+from database.updateToFirebase import Database
 
 
 class Main(QMainWindow):
@@ -18,7 +18,8 @@ class Main(QMainWindow):
         self.setAutoFillBackground(True)
 
         self.ref = initialdb()
-        loop_update_firebase()
+        self.fbupdate = Database()
+        self.fbupdate.start()
 
         self.grid_layout()
         self.set_calendar()
@@ -43,6 +44,7 @@ class Main(QMainWindow):
 
     def closeEvent(self, event):
         # kill thread updater
+        self.fbupdate.isDataupdate = False
         # close all cams
         if self.cam is not None:
             if self.cam.isVisible():

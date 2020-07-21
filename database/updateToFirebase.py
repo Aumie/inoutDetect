@@ -1,14 +1,17 @@
 import threading
+import time
 from datetime import datetime
 from process import isCamsOpen
 from database import initialdb
 
 
 # update to firebase every second
-def loop_update_firebase():
-    threading.Timer(1.0, loop_update_firebase).start()
-    update_data()
-
+class Database(threading.Thread):
+    isDataupdate = True
+    def run(self) -> None:
+        while self.isDataupdate:
+            update_data()
+            time.sleep(1)
 
 def update_data():
     if isCamsOpen.iscamopen:
