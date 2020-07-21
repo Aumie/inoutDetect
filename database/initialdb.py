@@ -33,44 +33,83 @@ def initialdb():
 def data_today():
     global ref
     global firebase
-    # cam0 initialize data
+    # cam0 initialize data --------------------------------------------------------------
     if firebase.child('in0').get() is None:
         firebase.update({'in0': 0})
     else:
-        isCamsOpen.p_in = firebase.child('in0').get()
+        if isCamsOpen.camdirect == 'lr':
+            isCamsOpen.p_in = firebase.child('in0').get()
+        else:
+            isCamsOpen.p_in = firebase.child('out0').get()
+
     if firebase.child('out0').get() is None:
         firebase.update({'out0': 0})
     else:
-        isCamsOpen.p_out = firebase.child('out0').get()
+        if isCamsOpen.camdirect == 'lr':
+            isCamsOpen.p_out = firebase.child('out0').get()
+        else:
+            isCamsOpen.p_out = firebase.child('in0').get()
+    # ----------------------------------------------------------------------------------
     if firebase.child('time_end').get() is None:
         firebase.update({'time_end': str(datetime.now().strftime("%H:%M:%S"))})
     if firebase.child('time_start').get() is None:
         firebase.update({'time_start': str(datetime.now().strftime("%H:%M:%S"))})
-    # cam1 initialize data
+
+    # cam1 initialize data ---------------------------------------------------------------
     if firebase.child('in1').get() is None:
         firebase.update({'in1': 0})
     else:
-        isCamsOpen.p_in1 = firebase.child('in1').get()
+        if isCamsOpen.camdirect1 == 'lr':
+            isCamsOpen.p_in1 = firebase.child('in1').get()
+        else:
+            isCamsOpen.p_in1 = firebase.child('out1').get()
+
     if firebase.child('out1').get() is None:
         firebase.update({'out1': 0})
     else:
-        isCamsOpen.p_out1 = firebase.child('out1').get()
-    # cam2 initialize data
+        if isCamsOpen.camdirect1 == 'lr':
+            isCamsOpen.p_out1 = firebase.child('out1').get()
+        else:
+            isCamsOpen.p_out1 = firebase.child('in1').get()
+
+    # ----------------------------------------------------------------------------------
+
+    # cam2 initialize data ---------------------------------------------------------------
     if firebase.child('in2').get() is None:
         firebase.update({'in2': 0})
     else:
-        isCamsOpen.p_in2 = firebase.child('in2').get()
+        if isCamsOpen.camdirect2 == 'lr':
+            isCamsOpen.p_in2 = firebase.child('in2').get()
+        else:
+            isCamsOpen.p_in2 = firebase.child('out2').get()
+
     if firebase.child('out2').get() is None:
         firebase.update({'out2': 0})
     else:
-        isCamsOpen.p_out2 = firebase.child('out2').get()
-    # cam3 initialize data
+        if isCamsOpen.camdirect2 == 'lr':
+            isCamsOpen.p_out2 = firebase.child('out2').get()
+        else:
+            isCamsOpen.p_out2 = firebase.child('in2').get()
+
+    # ----------------------------------------------------------------------------------
+
+    # cam3 initialize data --------------------------------------------------------------
     if firebase.child('in3').get() is None:
         firebase.update({'in3': 0})
     else:
-        isCamsOpen.p_in3 = firebase.child('in3').get()
+        if isCamsOpen.camdirect3 == 'lr':
+            isCamsOpen.p_in3 = firebase.child('in3').get()
+        else:
+            isCamsOpen.p_in3 = firebase.child('out3').get()
+
     if firebase.child('out3').get() is None:
         firebase.update({'out3': 0})
     else:
-        isCamsOpen.p_out3 = firebase.child('out3').get()
+        if isCamsOpen.camdirect3 == 'lr':
+            isCamsOpen.p_out3 = firebase.child('out3').get()
+        else:
+            isCamsOpen.p_out3 = firebase.child('in3').get()
+
+    # ----------------------------------------------------------------------------------
+
 

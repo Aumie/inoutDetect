@@ -20,21 +20,52 @@ def set_inoutlcds(self):
 
 def update_lcdin(self):
     if self.cameranum == 0:
-        self.inlcd.display(isCamsOpen.p_in)
+        if isCamsOpen.camdirect == 'lr':
+            self.inlcd.display(isCamsOpen.p_in)
+        else:
+            self.inlcd.display(isCamsOpen.p_out)
+
     if self.cameranum == 1:
-        self.inlcd.display(isCamsOpen.p_in1)
+        if isCamsOpen.camdirect1 == 'lr':
+            self.inlcd.display(isCamsOpen.p_in1)
+        else:
+            self.inlcd.display(isCamsOpen.p_out1)
+
     if self.cameranum == 2:
-        self.inlcd.display(isCamsOpen.p_in2)
+        if isCamsOpen.camdirect2 == 'lr':
+            self.inlcd.display(isCamsOpen.p_in2)
+        else:
+            self.inlcd.display(isCamsOpen.p_out2)
+
     if self.cameranum == 3:
-        self.inlcd.display(isCamsOpen.p_in3)
+        if isCamsOpen.camdirect3 == 'lr':
+            self.inlcd.display(isCamsOpen.p_in3)
+        else:
+            self.inlcd.display(isCamsOpen.p_out3)
 
 
 def update_lcdout(self):
     if self.cameranum == 0:
-        self.outlcd.display(isCamsOpen.p_out)
+        if isCamsOpen.camdirect == 'lr':
+            self.outlcd.display(isCamsOpen.p_out)
+        else:
+            self.outlcd.display(isCamsOpen.p_in)
+
     if self.cameranum == 1:
-        self.outlcd.display(isCamsOpen.p_out1)
+        if isCamsOpen.camdirect1 == 'lr':
+            self.outlcd.display(isCamsOpen.p_out1)
+        else:
+            self.outlcd.display(isCamsOpen.p_in1)
+
     if self.cameranum == 2:
-        self.outlcd.display(isCamsOpen.p_out2)
+        if isCamsOpen.camdirect2 == 'lr':
+            self.outlcd.display(isCamsOpen.p_out2)
+        else:
+            self.outlcd.display(isCamsOpen.p_in2)
+
     if self.cameranum == 3:
-        self.outlcd.display(isCamsOpen.p_out3)
+        if isCamsOpen.camdirect3 == 'lr':
+            self.outlcd.display(isCamsOpen.p_out3)
+        else:
+            self.outlcd.display(isCamsOpen.p_in3)
+
