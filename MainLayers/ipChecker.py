@@ -45,6 +45,6 @@ def update_isValidIp(self, val):
         self.ipdialog.close()
         callcameraDialog(self.cameranum)
     else:
-        information_box(message, 0)
+        information_box(message, -1)
 
 
